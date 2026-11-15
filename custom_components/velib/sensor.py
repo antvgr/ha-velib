@@ -33,6 +33,24 @@ from .entity import VelibAccountEntity, VelibStationEntity
 BIKES = "vélos"
 
 
+def _bike_dict(b) -> dict[str, Any]:
+    """Serialize an ElectricBike for the card (type-normalized)."""
+    return {
+        "number": b.number,
+        "type": "electric" if b.electric else "mechanical",
+        "dock": b.dock_position,
+        "battery_level": b.battery_level,
+        "battery_max": b.battery_max,
+        "battery_percent": b.battery_percent,
+        "charging": b.charging,
+        "rating": b.rating,
+        "rates": b.number_of_rates,
+        "status": b.status,
+        "available": (b.status or "").lower() not in ("indisponible", "unavailable"),
+        "last_rate_date": b.last_rate_date,
+    }
+
+
 # --------------------------------------------------------------------------- #
 # Station sensors
 # --------------------------------------------------------------------------- #
@@ -113,28 +131,21 @@ class VelibStationSensor(VelibStationEntity, SensorEntity):
         if s is None:
             return None
         if self.entity_description.key == "bikes":
+            # Full station payload consumed by the velib-station-card.
             return {
                 "station_code": s.code,
                 "station_name": s.name,
                 ATTR_LATITUDE: s.latitude,
                 ATTR_LONGITUDE: s.longitude,
+                "capacity": s.capacity,
+                "free_docks": s.docks_available,
+                "mechanical_available": s.mechanical_available,
+                "ebike_available": s.ebike_available,
+                "bikes": [_bike_dict(b) for b in s.bikes],
             }
         if self.entity_description.key == "ebike":
-            # Per-bike battery and rating (from searchStation).
-            return {
-                "bikes": [
-                    {
-                        "number": b.number,
-                        "battery_level": b.battery_level,
-                        "battery_max": b.battery_max,
-                        "battery_percent": b.battery_percent,
-                        "rating": b.rating,
-                        "charging": b.charging,
-                        "status": b.status,
-                    }
-                    for b in s.electric_bikes
-                ]
-            }
+            # Per-bike battery and rating, electric bikes only (back-compat).
+            return {"bikes": [_bike_dict(b) for b in s.electric_bikes]}
         return None
 
 

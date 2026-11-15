@@ -13,11 +13,10 @@ Intégration non officielle pour les Vélib' à Paris et en Métropole.
 
 ### Niveau de batterie et note des vélos électriques
 
-**Inclus**, et **sans compte** ! Pour chaque station suivie, l'intégration ajoute :
+**Inclus**, et **sans compte** ! Pour chaque station suivie, le détail vélo par vélo est exposé en **attributs**, sans capteur supplémentaire :
 
-* **Meilleure batterie vélo élec** (`%`) : meilleur niveau parmi les vélos électriques dispos.
-* **Vélos élec bien chargés** : nombre de vélos électriques avec batterie ≥ 2/3.
-* Le capteur **Vélos électriques** expose en attributs le détail par vélo : numéro, niveau de batterie (0–3 et ~%), note (1–3 étoiles), en charge, statut.
+* Le capteur **Vélos disponibles** porte la liste complète (`bikes`) : chaque vélo avec son numéro, son type (mécanique / électrique), sa borne, son niveau de batterie (0–3 et ~%), sa note (1–3 étoiles), en charge, statut et disponibilité. Il porte aussi `station_code`, `station_name`, `capacity`, `free_docks`, `mechanical_available`, `ebike_available` — de quoi alimenter la [carte Lovelace](#carte-lovelace).
+* Le capteur **Vélos électriques** porte, lui, uniquement les vélos électriques (`bikes`).
 
 Données issues de `POST /api/secured/searchStation` (voir [docs/API.md](docs/API.md)). La batterie est un niveau **grossier sur 3** (comme les barres de l'appli), converti en ~% pour l'affichage.
 
@@ -59,6 +58,37 @@ actions:
         Trajet de {{ (trigger.event.data.distance_m / 1000) | round(1) }} km
         de {{ trigger.event.data.departure_station }} à {{ trigger.event.data.arrival_station }}.
 ```
+
+## Carte Lovelace
+
+Une carte dédiée, `velib-station-card`, affiche une station (vélos, batterie, note, état) dans trois mises en page au choix.
+
+### Installation de la carte
+
+1. Copier `www/velib-station-card.js` dans le dossier `www` de votre configuration (il devient accessible à `/local/velib-station-card.js`).
+2. *Paramètres → Tableaux de bord → ⋮ → Ressources → Ajouter une ressource* :
+   * URL : `/local/velib-station-card.js`
+   * Type : *Module JavaScript*
+3. Recharger la page. La carte apparaît aussi dans *Ajouter une carte* (« Vélib' Station Card »).
+
+> Les utilisateurs HACS peuvent aussi ajouter ce dépôt en catégorie *Lovelace* pour gérer la ressource automatiquement.
+
+### Configuration de la carte
+
+```yaml
+type: custom:velib-station-card
+entity: sensor.velib_<station>_velos_disponibles
+layout: realistic   # realistic (défaut) | list | summary
+title: Ma station    # optionnel ; par défaut le nom de la station
+```
+
+Pointez `entity` sur le capteur **Vélos disponibles** de la station : c'est lui qui porte tous les attributs nécessaires.
+
+| `layout` | Aperçu |
+|---|---|
+| `realistic` | Vue de trois-quarts des bornes, un vélo par borne occupée, batterie/note au-dessus de chaque borne. |
+| `list` | Liste native, un vélo par ligne, avec batterie et note. |
+| `summary` | Résumé compact : compteurs, barre d'occupation, et pastilles des vélos disponibles triées du meilleur au moins bon. |
 
 ## Développement
 
