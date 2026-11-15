@@ -65,15 +65,13 @@ Une carte dédiée, `velib-station-card`, affiche une station (vélos, batterie,
 
 ### Installation de la carte
 
-1. Copier `www/velib-station-card.js` dans le dossier `www` de votre configuration (il devient accessible à `/local/velib-station-card.js`).
-2. *Paramètres → Tableaux de bord → ⋮ → Ressources → Ajouter une ressource* :
-   * URL : `/local/velib-station-card.js`
-   * Type : *Module JavaScript*
-3. Recharger la page. La carte apparaît aussi dans *Ajouter une carte* (« Vélib' Station Card »).
-
-> Les utilisateurs HACS peuvent aussi ajouter ce dépôt en catégorie *Lovelace* pour gérer la ressource automatiquement.
+**Rien à installer.** La carte est embarquée dans l'intégration et chargée automatiquement par Home Assistant — pas de fichier à copier ni de ressource Lovelace à ajouter. Après installation (ou mise à jour) de l'intégration et un redémarrage, elle apparaît directement dans *Ajouter une carte* (« Vélib' Station Card »).
 
 ### Configuration de la carte
+
+Un **éditeur visuel** est disponible : dans *Ajouter une carte*, choisissez « Vélib' Station Card » puis sélectionnez la station, la mise en page et le titre. Aucune édition YAML nécessaire.
+
+En YAML, la configuration équivalente est :
 
 ```yaml
 type: custom:velib-station-card

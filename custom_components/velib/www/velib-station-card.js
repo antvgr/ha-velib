@@ -380,6 +380,21 @@
 
     set hass(hass) { this._hass = hass; this._render(); }
 
+    // Éditeur visuel dans l'UI « Ajouter une carte »
+    static getConfigElement() {
+      return document.createElement("velib-station-card-editor");
+    }
+    static getStubConfig(hass) {
+      var ent = "";
+      if (hass && hass.states) {
+        ent = Object.keys(hass.states).find(function (e) {
+          var s = hass.states[e];
+          return e.indexOf("sensor.") === 0 && s && s.attributes && s.attributes.bikes !== undefined;
+        }) || "";
+      }
+      return { entity: ent, layout: "realistic" };
+    }
+
     getCardSize() {
       var l = this._config && this._config.layout;
       if (l === "list") {
@@ -443,6 +458,50 @@
     }
   }
 
+  // --- Éditeur de configuration (ha-form natif) ---
+  var EDITOR_SCHEMA = [
+    { name: "entity", required: true, selector: { entity: { domain: "sensor", integration: "velib" } } },
+    { name: "layout", selector: { select: { mode: "dropdown", options: [
+      { value: "realistic", label: "Réaliste (vue 3/4)" },
+      { value: "list", label: "Liste" },
+      { value: "summary", label: "Résumé" }
+    ] } } },
+    { name: "title", selector: { text: {} } }
+  ];
+  var EDITOR_LABELS = {
+    entity: "Capteur de station (Vélos disponibles)",
+    layout: "Mise en page",
+    title: "Titre (optionnel)"
+  };
+
+  class VelibStationCardEditor extends HTMLElement {
+    setConfig(config) {
+      this._config = Object.assign({ layout: "realistic" }, config || {});
+      this._render();
+    }
+    set hass(hass) { this._hass = hass; this._render(); }
+    _render() {
+      if (!this._hass || !this._config) return;
+      if (!this._form) {
+        this._form = document.createElement("ha-form");
+        this._form.computeLabel = function (s) { return EDITOR_LABELS[s.name] || s.name; };
+        this._form.addEventListener("value-changed", function (ev) {
+          ev.stopPropagation();
+          this.dispatchEvent(new CustomEvent("config-changed", {
+            detail: { config: ev.detail.value }, bubbles: true, composed: true
+          }));
+        }.bind(this));
+        this.appendChild(this._form);
+      }
+      this._form.hass = this._hass;
+      this._form.schema = EDITOR_SCHEMA;
+      this._form.data = this._config;
+    }
+  }
+  if (!customElements.get("velib-station-card-editor")) {
+    customElements.define("velib-station-card-editor", VelibStationCardEditor);
+  }
+
   if (!customElements.get("velib-station-card")) {
     customElements.define("velib-station-card", VelibStationCard);
   }
@@ -451,11 +510,12 @@
     type: "velib-station-card",
     name: "Vélib' Station Card",
     description: "Station Vélib' : vélos, batterie, note, état",
-    preview: true
+    preview: true,
+    documentationURL: "https://github.com/antvgr/ha-velib"
   });
   // Bannière console (optionnelle)
   try {
-    console.info("%c VELIB-STATION-CARD %c v1.0 ", "background:#00A9E0;color:#fff;border-radius:3px 0 0 3px;padding:2px 4px",
+    console.info("%c VELIB-STATION-CARD %c v1.1 ", "background:#00A9E0;color:#fff;border-radius:3px 0 0 3px;padding:2px 4px",
       "background:#82BC00;color:#fff;border-radius:0 3px 3px 0;padding:2px 4px");
   } catch (e) { }
 })();

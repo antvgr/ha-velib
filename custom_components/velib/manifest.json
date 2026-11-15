@@ -5,6 +5,10 @@
     "@antvgr"
   ],
   "config_flow": true,
+  "dependencies": [
+    "http",
+    "frontend"
+  ],
   "documentation": "https://github.com/antvgr/ha-velib",
   "integration_type": "hub",
   "iot_class": "cloud_polling",
@@ -13,5 +17,5 @@
     "custom_components.velib"
   ],
   "requirements": [],
-  "version": "1.1.0"
+  "version": "1.2.0"
 }
