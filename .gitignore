@@ -13,3 +13,6 @@ captures/
 # Local app key (never commit)
 secrets.local.json
 app_basic.txt
+
+# Logo source (not needed in repo)
+logo-source.*
