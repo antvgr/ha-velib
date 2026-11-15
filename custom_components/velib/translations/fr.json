@@ -1,0 +1,138 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Vélib' Métropole",
+        "menu_options": {
+          "stations": "Suivre des stations (données publiques)",
+          "account": "Connecter mon compte Vélib' (trajets)"
+        }
+      },
+      "stations": {
+        "title": "Rechercher des stations",
+        "description": "Nom ou numéro de station. Laissez vide pour afficher les stations les plus proches de votre domicile.",
+        "data": {
+          "search": "Recherche"
+        }
+      },
+      "select_stations": {
+        "title": "Choisir les stations",
+        "data": {
+          "stations": "Stations",
+          "scan_interval": "Intervalle de mise à jour"
+        },
+        "data_description": {
+          "scan_interval": "Les données publiques sont rafraîchies environ toutes les minutes."
+        }
+      },
+      "account": {
+        "title": "Compte Vélib'",
+        "description": "Identifiants de velib-metropole.fr. Cette connexion utilise l'API non officielle du site : elle peut cesser de fonctionner sans préavis.",
+        "data": {
+          "username": "Identifiant (e-mail ou n° client)",
+          "password": "Mot de passe"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Reconnexion",
+        "description": "Le mot de passe de {username} n'est plus accepté.",
+        "data": {
+          "password": "Mot de passe"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossible de joindre Vélib'.",
+      "invalid_auth": "Identifiant ou mot de passe incorrect.",
+      "unknown": "Erreur inattendue.",
+      "no_station": "Choisissez au moins une station.",
+      "no_match": "Aucune station trouvée."
+    },
+    "abort": {
+      "already_configured": "Déjà configuré. Modifiez les stations via « Configurer ».",
+      "reauth_successful": "Reconnexion réussie."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Ajouter des stations",
+        "description": "Recherchez des stations à ajouter (laissez vide pour les plus proches). Les stations déjà suivies restent proposées.",
+        "data": {
+          "search": "Recherche"
+        }
+      },
+      "select_stations": {
+        "title": "Choisir les stations",
+        "data": {
+          "stations": "Stations",
+          "scan_interval": "Intervalle de mise à jour"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossible de joindre Vélib'.",
+      "no_station": "Choisissez au moins une station."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "bikes": {
+        "name": "Vélos disponibles"
+      },
+      "mechanical": {
+        "name": "Vélos mécaniques"
+      },
+      "ebike": {
+        "name": "Vélos électriques"
+      },
+      "docks": {
+        "name": "Bornes libres"
+      },
+      "capacity": {
+        "name": "Capacité"
+      },
+      "last_reported": {
+        "name": "Dernière remontée"
+      },
+      "last_trip": {
+        "name": "Dernier trajet"
+      },
+      "last_trip_distance": {
+        "name": "Distance du dernier trajet"
+      },
+      "last_trip_duration": {
+        "name": "Durée du dernier trajet"
+      },
+      "last_trip_speed": {
+        "name": "Vitesse moyenne du dernier trajet"
+      },
+      "trip_count": {
+        "name": "Nombre de trajets"
+      },
+      "total_distance": {
+        "name": "Distance totale"
+      },
+      "co2_saved": {
+        "name": "CO₂ économisé"
+      },
+      "bonus_minutes": {
+        "name": "Minutes bonus"
+      },
+      "best_battery": {
+        "name": "Meilleure batterie vélo élec"
+      },
+      "ebikes_high_battery": {
+        "name": "Vélos élec bien chargés"
+      }
+    },
+    "binary_sensor": {
+      "renting": {
+        "name": "Location possible"
+      },
+      "returning": {
+        "name": "Retour possible"
+      }
+    }
+  }
+}

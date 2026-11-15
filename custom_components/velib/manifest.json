@@ -1,0 +1,17 @@
+{
+  "domain": "velib",
+  "name": "Vélib' Métropole",
+  "codeowners": [
+    "@antvgr"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/antvgr/ha-velib",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/antvgr/ha-velib/issues",
+  "loggers": [
+    "custom_components.velib"
+  ],
+  "requirements": [],
+  "version": "0.1.0"
+}

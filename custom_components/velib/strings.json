@@ -1,0 +1,138 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Vélib' Métropole",
+        "menu_options": {
+          "stations": "Follow stations (public data)",
+          "account": "Connect my Vélib' account (trips)"
+        }
+      },
+      "stations": {
+        "title": "Search stations",
+        "description": "Station name or number. Leave empty to list the stations closest to your home.",
+        "data": {
+          "search": "Search"
+        }
+      },
+      "select_stations": {
+        "title": "Choose stations",
+        "data": {
+          "stations": "Stations",
+          "scan_interval": "Update interval"
+        },
+        "data_description": {
+          "scan_interval": "The public feed refreshes about once a minute."
+        }
+      },
+      "account": {
+        "title": "Vélib' account",
+        "description": "Your velib-metropole.fr credentials. This uses the website's unofficial API and may stop working without notice.",
+        "data": {
+          "username": "Username (e-mail or customer number)",
+          "password": "Password"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Re-authenticate",
+        "description": "The password for {username} is no longer accepted.",
+        "data": {
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot reach Vélib'.",
+      "invalid_auth": "Invalid username or password.",
+      "unknown": "Unexpected error.",
+      "no_station": "Choose at least one station.",
+      "no_match": "No station found."
+    },
+    "abort": {
+      "already_configured": "Already configured. Change stations via “Configure”.",
+      "reauth_successful": "Re-authentication successful."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Add stations",
+        "description": "Search stations to add (empty = nearest). Stations already followed stay listed.",
+        "data": {
+          "search": "Search"
+        }
+      },
+      "select_stations": {
+        "title": "Choose stations",
+        "data": {
+          "stations": "Stations",
+          "scan_interval": "Update interval"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot reach Vélib'.",
+      "no_station": "Choose at least one station."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "bikes": {
+        "name": "Available bikes"
+      },
+      "mechanical": {
+        "name": "Mechanical bikes"
+      },
+      "ebike": {
+        "name": "E-bikes"
+      },
+      "docks": {
+        "name": "Free docks"
+      },
+      "capacity": {
+        "name": "Capacity"
+      },
+      "last_reported": {
+        "name": "Last reported"
+      },
+      "last_trip": {
+        "name": "Last trip"
+      },
+      "last_trip_distance": {
+        "name": "Last trip distance"
+      },
+      "last_trip_duration": {
+        "name": "Last trip duration"
+      },
+      "last_trip_speed": {
+        "name": "Last trip average speed"
+      },
+      "trip_count": {
+        "name": "Trip count"
+      },
+      "total_distance": {
+        "name": "Total distance"
+      },
+      "co2_saved": {
+        "name": "CO₂ saved"
+      },
+      "bonus_minutes": {
+        "name": "Bonus minutes"
+      },
+      "best_battery": {
+        "name": "Best e-bike battery"
+      },
+      "ebikes_high_battery": {
+        "name": "E-bikes with high battery"
+      }
+    },
+    "binary_sensor": {
+      "renting": {
+        "name": "Renting"
+      },
+      "returning": {
+        "name": "Returning"
+      }
+    }
+  }
+}
