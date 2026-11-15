@@ -118,12 +118,6 @@
       },
       "bonus_minutes": {
         "name": "Bonus minutes"
-      },
-      "best_battery": {
-        "name": "Best e-bike battery"
-      },
-      "ebikes_high_battery": {
-        "name": "E-bikes with high battery"
       }
     },
     "binary_sensor": {

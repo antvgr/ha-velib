@@ -66,20 +66,6 @@ STATION_SENSORS: tuple[VelibStationSensorDescription, ...] = (
         value_fn=lambda s: s.ebike_available,
     ),
     VelibStationSensorDescription(
-        key="best_battery",
-        translation_key="best_battery",
-        device_class=SensorDeviceClass.BATTERY,
-        native_unit_of_measurement="%",
-        value_fn=lambda s: s.best_battery_percent,
-    ),
-    VelibStationSensorDescription(
-        key="ebikes_high_battery",
-        translation_key="ebikes_high_battery",
-        native_unit_of_measurement=BIKES,
-        state_class=SensorStateClass.MEASUREMENT,
-        value_fn=lambda s: s.ebikes_high_battery,
-    ),
-    VelibStationSensorDescription(
         key="docks",
         translation_key="docks",
         native_unit_of_measurement="bornes",

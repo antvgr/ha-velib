@@ -103,19 +103,6 @@ class Station:
         """Available electric bikes that report a battery level."""
         return [b for b in self.bikes if b.electric and b.battery_level is not None]
 
-    @property
-    def best_battery_percent(self) -> int | None:
-        """Highest battery (as %) among available electric bikes."""
-        levels = [b.battery_percent for b in self.electric_bikes if b.battery_percent is not None]
-        return max(levels) if levels else None
-
-    @property
-    def ebikes_high_battery(self) -> int | None:
-        """Count of electric bikes with battery >= 2/3. None if no bike data."""
-        if not self.bikes:
-            return None
-        return sum(1 for b in self.electric_bikes if (b.battery_level or 0) >= 2)
-
 
 def _bike_types(raw: list[dict[str, Any]] | None) -> dict[str, int]:
     """Flatten ``[{"mechanical": 1}, {"ebike": 2}]`` into a dict."""

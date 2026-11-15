@@ -118,12 +118,6 @@
       },
       "bonus_minutes": {
         "name": "Minutes bonus"
-      },
-      "best_battery": {
-        "name": "Meilleure batterie vélo élec"
-      },
-      "ebikes_high_battery": {
-        "name": "Vélos élec bien chargés"
       }
     },
     "binary_sensor": {
